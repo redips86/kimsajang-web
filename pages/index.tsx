@@ -5,6 +5,7 @@ const Home: NextPage = () => {
     return (
         <Layout title={"kimsajang"}>
             <div>
+                <h1 className={"text-3xl"}></h1>
                 Main
             </div>
         </Layout>

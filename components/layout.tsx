@@ -15,7 +15,14 @@ export default function Layout({
             <title>{title}</title>
         </Head>
         <div>
-            Top
+            <img src="" alt=""/>
+            <div className={""}>
+                <h2>홈</h2>
+                <h2>기업 리뷰</h2>
+                <h2>채용 공고</h2>
+                <button>글쓰기</button>
+                <button>로그인</button>
+            </div>
         </div>
         <div>
             {children}
