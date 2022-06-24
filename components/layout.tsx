@@ -1,7 +1,9 @@
 import Head from "next/head";
 import React from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faMagnifyingGlass} from "@fortawesome/free-solid-svg-icons";
 import {faApple, faGooglePlay} from "@fortawesome/free-brands-svg-icons";
+import Link from "next/link";
 
 interface LayoutProps {
     title: String;
@@ -23,9 +25,14 @@ export default function Layout({
                 <div className={"text-2xl font-bold"}>메뉴1</div>
                 <div className={"text-2xl font-bold"}>메뉴2</div>
             </div>
-            <div className={"flex p-2"}>
+            <div className={"flex items-center p-2"}>
+                <Link href={"/search"}>
+                    <button className={"w-6 h-6"}>
+                        <FontAwesomeIcon icon={faMagnifyingGlass} className={"w-full h-full"}></FontAwesomeIcon>
+                    </button>
+                </Link>
                 <button className={"mx-2 text-white bg-zinc-500 p-3 w-24"}>글쓰기</button>
-                <button className={"mx-2 border border-zinc-500 w-24 p-3"}>로그인</button>
+                <button className={"mx-2 border border-zinc-500 p-3 w-24"}>로그인</button>
             </div>
         </div>
         <div>
@@ -51,7 +58,8 @@ export default function Layout({
                 </button>
                 <button className={"mx-2 px-7 py-2 bg-zinc-200 rounded-full"}>
                     <FontAwesomeIcon icon={faGooglePlay} className={"mr-3"}/>
-                    GOOGLE PLAY</button>
+                    GOOGLE PLAY
+                </button>
             </div>
         </div>
     </div>
