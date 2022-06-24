@@ -1,5 +1,7 @@
 import Head from "next/head";
 import React from "react";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faApple, faGooglePlay} from "@fortawesome/free-brands-svg-icons";
 
 interface LayoutProps {
     title: String;
@@ -42,9 +44,14 @@ export default function Layout({
                     @2022 Prismweaver Inc.
                 </div>
             </div>
-            <div className={"flex"}>
-                <button className={"mx-2 px-3 py-2 bg-zinc-200 rounded-full"}>APP STORE</button>
-                <button className={"mx-2 px-3 py-2 bg-zinc-200 rounded-full"}>GOOGLE PLAY</button>
+            <div className={"flex text-md"}>
+                <button className={"mx-2 px-7 py-3 bg-zinc-200 rounded-full"}>
+                    <FontAwesomeIcon icon={faApple}/>
+                    APP STORE
+                </button>
+                <button className={"mx-2 px-7 py-2 bg-zinc-200 rounded-full"}>
+                    <FontAwesomeIcon icon={faGooglePlay}/>
+                    GOOGLE PLAY</button>
             </div>
         </div>
     </div>
