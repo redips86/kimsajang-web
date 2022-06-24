@@ -23,7 +23,7 @@ export default function MainCard({
                 {
                     [1, 2, 3, 4, 5].map(value => {
                         return <div key={value} className={"flex justify-between border-b-2 py-3"}>
-                            <div className={"font-bold"}>블라블라 글 제목</div>
+                            <div className={"font-bold"}>블라블라 글 제목🥳</div>
                             <div className={"text-gray-400 flex space-x-2 items-center"}>
                                 <FontAwesomeIcon icon={faEye}></FontAwesomeIcon>
                                 <span>597</span>
