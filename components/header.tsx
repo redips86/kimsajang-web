@@ -9,10 +9,10 @@ export default function Layout() {
             <div className={"hidden xl:block flex justify-between pb-2 border-b-2"}>
                 <div className={"flex justify-between p-2"}>
                     <div className={"flex space-x-5 items-end"}>
-                        <div className={"text-4xl font-bold"}>Kimsajang</div>
-                        <div className={"text-2xl font-bold"}>홈</div>
-                        <div className={"text-2xl font-bold"}>메뉴1</div>
-                        <div className={"text-2xl font-bold"}>메뉴2</div>
+                        <div className={"text-4xl font-bold cursor-pointer"}>Kimsajang</div>
+                        <div className={"text-2xl font-bold cursor-pointer"}>홈</div>
+                        <div className={"text-2xl font-bold cursor-pointer"}>메뉴1</div>
+                        <div className={"text-2xl font-bold cursor-pointer"}>메뉴2</div>
                     </div>
                     <div>
                         <button className={"mx-2 text-white bg-zinc-500 p-3 w-24"}>글쓰기</button>
@@ -24,7 +24,7 @@ export default function Layout() {
             <div className={"xl:hidden"}>
                 <div className={"flex justify-between pb-2 border-b-2"}>
                     <div className={"flex space-x-5 items-end p-2"}>
-                        <div className={"text-4xl font-bold"}>Kimsajang</div>
+                        <div className={"text-4xl font-bold cursor-pointer"}>Kimsajang</div>
                     </div>
                     <div className={"flex items-center p-2"}>
                         <Link href={"/search"}>
@@ -38,9 +38,9 @@ export default function Layout() {
                 </div>
                 <div className={"flex pb-2 border-b-8"}>
                     <div className={"flex p-2"}>
-                        <div className={"text-2xl font-bold"}>홈</div>
-                        <div className={"text-2xl font-bold ml-2"}>메뉴1</div>
-                        <div className={"text-2xl font-bold ml-2"}>메뉴2</div>
+                        <div className={"text-2xl font-bold cursor-pointer"}>홈</div>
+                        <div className={"text-2xl font-bold ml-2 cursor-pointer"}>메뉴1</div>
+                        <div className={"text-2xl font-bold ml-2 cursor-pointer"}>메뉴2</div>
                     </div>
                 </div>
             </div>

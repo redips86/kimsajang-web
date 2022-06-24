@@ -14,8 +14,8 @@ export default function MainCard({
                                  }: MainCardProps) {
 
     return (
-        <div className={"p-2 border-b-8"}>
-            <div className={"ml-2 border-b-2 pb-2 py-3 font-bold text-xl"}>
+        <div className={"mx-2 p-2 border-b-8"}>
+            <div className={" border-b-2 pb-2 py-3 font-bold text-xl"}>
                 <FontAwesomeIcon icon={icon}></FontAwesomeIcon>
                 <span className={"ml-3"}>{topic}</span>
             </div>
@@ -33,7 +33,8 @@ export default function MainCard({
                 }
             </div>
             <Link href={`/topic/${topic.replaceAll(' ', '-')}`}>
-                <div className={"flex justify-center items-center h-10 text-gray-400"}>더보기</div>
+                <div className={"flex justify-center items-center h-10 text-gray-400" +
+                    " cursor-pointer"}>더보기</div>
             </Link>
         </div>
     )
