@@ -1,9 +1,7 @@
 import type {NextPage} from 'next'
 import Layout from "@components/layout";
 import MainCard from "@components/mainCard";
-import {faCoins, faComments, faCrown, faEye, faHeart, faHouse} from "@fortawesome/free-solid-svg-icons";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import Link from "next/link";
+import {faCoins, faComments, faCrown, faHeart, faHouse} from "@fortawesome/free-solid-svg-icons";
 
 const Home: NextPage = () => {
     return (
@@ -21,30 +19,25 @@ const Home: NextPage = () => {
                 <div className={"flex"}>
                     <div className={"basis-2/3 grid grid-cols-2 gap-8"}>
                         <div className={"col-span-2 row-span-2"}>
-                            {/*<MainCard topic={"토픽 베스트"} icon={faCrown}></MainCard>*/}
-                            <div className={"mx-2 p-2 border-b-8"}>
-                                <div className={" border-b-2 pb-2 py-3 font-bold text-xl"}>
-                                    <span className={"ml-3"}>토픽 베스트</span>
-                                </div>
-                                <div>
-                                    {
-                                        [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(value => {
-                                            return <div key={value} className={"flex justify-between border-b-2 py-3"}>
-                                                <div className={"font-bold"}>토픽 베스트 👍👍</div>
-                                                <div className={"text-gray-400 flex space-x-2 items-center"}>
-                                                    <FontAwesomeIcon icon={faEye}></FontAwesomeIcon>
-                                                    <span>597</span>
-                                                </div>
-                                            </div>
-                                        })
-                                    }
-                                </div>
-                                <Link href={`/topic/}`}>
-                                    <div className={"flex justify-center items-center h-10 text-gray-400" +
-                                        " cursor-pointer"}>더보기
-                                    </div>
-                                </Link>
-                            </div>
+                            <MainCard topic={"토픽 베스트"} icon={faCrown}></MainCard>
+                            {/*<div className={"mx-2 p-2 border-b-8"}>*/}
+                            {/*    <div className={" border-b-2 pb-2 py-3 font-bold text-xl"}>*/}
+                            {/*        <span className={"ml-3"}>토픽 베스트</span>*/}
+                            {/*    </div>*/}
+                            {/*    <div>*/}
+                            {/*        {*/}
+                            {/*            [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(value => {*/}
+                            {/*                return <div key={value} className={"flex justify-between border-b-2 py-3"}>*/}
+                            {/*                    <div className={"font-bold"}>토픽 베스트 👍👍</div>*/}
+                            {/*                    <div className={"text-gray-400 flex space-x-2 items-center"}>*/}
+                            {/*                        <FontAwesomeIcon icon={faEye}></FontAwesomeIcon>*/}
+                            {/*                        <span>597</span>*/}
+                            {/*                    </div>*/}
+                            {/*                </div>*/}
+                            {/*            })*/}
+                            {/*        }*/}
+                            {/*    </div>*/}
+                            {/*</div>*/}
                         </div>
                         <div>
                             <MainCard topic={"블라블라"} icon={faComments}></MainCard>

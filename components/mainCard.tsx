@@ -14,10 +14,21 @@ export default function MainCard({
                                  }: MainCardProps) {
 
     return (
-        <div className={"mx-2 p-2 border-b-8"}>
-            <div className={" border-b-2 pb-2 py-3 font-bold text-xl"}>
-                <FontAwesomeIcon icon={icon}></FontAwesomeIcon>
-                <span className={"ml-3"}>{topic}</span>
+        <div className={"mx-2 p-2 border-b-8 xl:border-b-0"}>
+            <div className={"border-b-2 pb-2 py-3 font-bold text-xl"}>
+
+                <div className={"flex justify-between"}>
+                    <div>
+                        <FontAwesomeIcon icon={icon}></FontAwesomeIcon>
+                        <span className={"ml-3"}>{topic}</span>
+                    </div>
+                    <span className={"hidden xl:block"}>
+                    <Link href={`/topic/${topic.replaceAll(' ', '-')}`}>
+                        <div className={"cursor-pointer text-base"}>더보기 &gt;
+                        </div>
+                    </Link>
+                </span>
+                </div>
             </div>
             <div>
                 {
@@ -32,10 +43,13 @@ export default function MainCard({
                     })
                 }
             </div>
-            <Link href={`/topic/${topic.replaceAll(' ', '-')}`}>
-                <div className={"flex justify-center items-center h-10 text-gray-400" +
-                    " cursor-pointer"}>더보기</div>
-            </Link>
+            <div className={"xl:hidden"}>
+                <Link href={`/topic/${topic.replaceAll(' ', '-')}`}>
+                    <div className={"flex justify-center items-center h-10 text-gray-400" +
+                        " cursor-pointer"}>더보기
+                    </div>
+                </Link>
+            </div>
         </div>
     )
 };
