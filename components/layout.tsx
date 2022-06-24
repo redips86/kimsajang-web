@@ -16,7 +16,7 @@ export default function Layout({
         <Head>
             <title>{title}</title>
         </Head>
-        <div className={"flex justify-between p-2 border-b-2"}>
+        <div className={"flex justify-between pb-2 border-b-2"}>
             <div className={"flex space-x-5 items-end p-2"}>
                 <div className={"text-4xl font-bold"}>Kimsajang</div>
                 <div className={"text-2xl font-bold"}>홈</div>
@@ -31,8 +31,8 @@ export default function Layout({
         <div>
             {children}
         </div>
-        <div className={"flex justify-between items-center  text-lg"}>
-            <div className={"flex-col justify-center items-center"}>
+        <div className={"flex justify-between items-center  text-lg mt-2 border-t-2"}>
+            <div className={"flex-col justify-center items-center text-gray-500"}>
                 <div className={"flex"}>
                     <a className={"mx-2"}>서비스 소개</a> |
                     <a className={"mx-2"}>이용약관</a> |
@@ -40,17 +40,17 @@ export default function Layout({
                     <a className={"mx-2"}>개인정보 처리방침</a> |
                     <a className={"mx-2"}>신고 가이드</a>
                 </div>
-                <div className={"flex mt-3"}>
+                <div className={"flex mt-3 text-gray-400"}>
                     @2022 Prismweaver Inc.
                 </div>
             </div>
-            <div className={"flex text-md"}>
+            <div className={"flex text-base"}>
                 <button className={"mx-2 px-7 py-3 bg-zinc-200 rounded-full"}>
-                    <FontAwesomeIcon icon={faApple}/>
+                    <FontAwesomeIcon icon={faApple} className={"mr-3"}/>
                     APP STORE
                 </button>
                 <button className={"mx-2 px-7 py-2 bg-zinc-200 rounded-full"}>
-                    <FontAwesomeIcon icon={faGooglePlay}/>
+                    <FontAwesomeIcon icon={faGooglePlay} className={"mr-3"}/>
                     GOOGLE PLAY</button>
             </div>
         </div>
