@@ -23,7 +23,8 @@ export default function Layout() {
             </div>
             <div className={"xl:hidden"}>
                 <div className={"flex justify-between pb-2 border-b-2"}>
-                    <div className={"flex space-x-5 items-end p-2"}>
+                    <div className={"flex space-x-5 items-c" +
+                        "enter p-2"}>
                         <div className={"text-4xl font-bold cursor-pointer"}>Kimsajang</div>
                     </div>
                     <div className={"flex items-center p-2"}>

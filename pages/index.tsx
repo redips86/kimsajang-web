@@ -2,9 +2,31 @@ import type {NextPage} from 'next'
 import Layout from "@components/layout";
 import MainCard from "@components/mainCard";
 import {faCoins, faComments, faCrown, faHeart, faHouse} from "@fortawesome/free-solid-svg-icons";
+import {gql, useQuery} from "@apollo/client";
 
 const Home: NextPage = () => {
+    const TEST = gql`
+        query Users {
+            users {
+                createdAt
+                deleted
+                id
+                intro
+                nickname
+                updatedAt
+            }
+        }
+    `;
+
+    const {loading, error, data} = useQuery(TEST);
+
+    if(loading) return <p>Loading...</p>;
+    if(error) return <p>Error:(</p>
+
+    console.log(data);
+
     return (
+
         <Layout title="kimsajang">
             <div className={"xl:hidden"}>
                 <div className={"grid gap-8"}>
