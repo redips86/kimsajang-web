@@ -8,7 +8,12 @@ generates:
       - "typescript-operations"
       - "typescript-react-query"
     config:
-      fetcher: fetch
+      typesPrefix: I
+      fetcher:
+        endpoint: 'process.env.ENDPOINT'
+        fetchParams:
+          headers:
+            Content-Type: 'application/json'
   ./graphql.schema.json:
     plugins:
       - "introspection"

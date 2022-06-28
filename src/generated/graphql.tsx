@@ -6,11 +6,11 @@ export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K]
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
 
-function fetcher<TData, TVariables>(endpoint: string, requestInit: RequestInit, query: string, variables?: TVariables) {
+function fetcher<TData, TVariables>(query: string, variables?: TVariables) {
   return async (): Promise<TData> => {
-    const res = await fetch(endpoint, {
-      method: 'POST',
-      ...requestInit,
+    const res = await fetch(process.env.ENDPOINT as string, {
+    method: "POST",
+    ...({"headers":{"Content-Type":"application/json"}}),
       body: JSON.stringify({ query, variables }),
     });
 
@@ -34,12 +34,12 @@ export type Scalars = {
   Float: number;
 };
 
-export type CreateLocationInput = {
+export type ICreateLocationInput = {
   /** 지역이름 */
   name: Scalars['String'];
 };
 
-export type CreateUserInput = {
+export type ICreateUserInput = {
   /** 자기소개 */
   intro?: InputMaybe<Scalars['String']>;
   /** 지역 */
@@ -50,12 +50,12 @@ export type CreateUserInput = {
   sectorIds?: InputMaybe<Array<Scalars['Float']>>;
 };
 
-export type CreateUserTagInput = {
+export type ICreateUserTagInput = {
   /** Example field (placeholder) */
   exampleField: Scalars['Int'];
 };
 
-export type Location = {
+export type ILocation = {
   __typename?: 'Location';
   /** 생성일시 */
   createdAt: Scalars['String'];
@@ -69,97 +69,97 @@ export type Location = {
   updatedAt: Scalars['String'];
 };
 
-export type Mutation = {
+export type IMutation = {
   __typename?: 'Mutation';
   createLocation: Scalars['String'];
   createUser: Scalars['Boolean'];
-  createUserTag: UserTag;
-  removeLocation: Location;
+  createUserTag: IUserTag;
+  removeLocation: ILocation;
   removeUser: Scalars['Boolean'];
   removeUserTag: Scalars['Float'];
-  updateLocation: Location;
+  updateLocation: ILocation;
   updateUser: Scalars['Boolean'];
-  updateUserTag: UserTag;
+  updateUserTag: IUserTag;
 };
 
 
-export type MutationCreateLocationArgs = {
-  createLocationInput: CreateLocationInput;
+export type IMutationCreateLocationArgs = {
+  createLocationInput: ICreateLocationInput;
 };
 
 
-export type MutationCreateUserArgs = {
-  createUserInput: CreateUserInput;
+export type IMutationCreateUserArgs = {
+  createUserInput: ICreateUserInput;
 };
 
 
-export type MutationCreateUserTagArgs = {
-  createUserTagInput: CreateUserTagInput;
+export type IMutationCreateUserTagArgs = {
+  createUserTagInput: ICreateUserTagInput;
 };
 
 
-export type MutationRemoveLocationArgs = {
+export type IMutationRemoveLocationArgs = {
   id: Scalars['Int'];
 };
 
 
-export type MutationRemoveUserArgs = {
+export type IMutationRemoveUserArgs = {
   id: Scalars['Int'];
 };
 
 
-export type MutationRemoveUserTagArgs = {
+export type IMutationRemoveUserTagArgs = {
   id: Scalars['Int'];
 };
 
 
-export type MutationUpdateLocationArgs = {
-  updateLocationInput: UpdateLocationInput;
+export type IMutationUpdateLocationArgs = {
+  updateLocationInput: IUpdateLocationInput;
 };
 
 
-export type MutationUpdateUserArgs = {
-  updateUserInput: UpdateUserInput;
+export type IMutationUpdateUserArgs = {
+  updateUserInput: IUpdateUserInput;
 };
 
 
-export type MutationUpdateUserTagArgs = {
-  updateUserTagInput: UpdateUserTagInput;
+export type IMutationUpdateUserTagArgs = {
+  updateUserTagInput: IUpdateUserTagInput;
 };
 
-export type Query = {
+export type IQuery = {
   __typename?: 'Query';
-  location: Location;
-  locations: Array<Location>;
-  user: User;
-  userTag: UserTag;
-  userTags: Array<UserTag>;
-  users: Array<User>;
+  location: ILocation;
+  locations: Array<ILocation>;
+  user: IUser;
+  userTag: IUserTag;
+  userTags: Array<IUserTag>;
+  users: Array<IUser>;
 };
 
 
-export type QueryLocationArgs = {
+export type IQueryLocationArgs = {
   id: Scalars['Int'];
 };
 
 
-export type QueryUserArgs = {
+export type IQueryUserArgs = {
   id: Scalars['Int'];
 };
 
 
-export type QueryUserTagArgs = {
+export type IQueryUserTagArgs = {
   id: Scalars['Int'];
 };
 
-export type UpdateLocationInput = {
+export type IUpdateLocationInput = {
   /** 지역 ID */
   id: Scalars['Int'];
   /** 지역이름 */
   name?: InputMaybe<Scalars['String']>;
 };
 
-export type UpdateUserInput = {
+export type IUpdateUserInput = {
   /** 사용자 ID */
   id: Scalars['Int'];
   /** 자기소개 */
@@ -172,13 +172,13 @@ export type UpdateUserInput = {
   sectorIds?: InputMaybe<Array<Scalars['Float']>>;
 };
 
-export type UpdateUserTagInput = {
+export type IUpdateUserTagInput = {
   /** Example field (placeholder) */
   exampleField?: InputMaybe<Scalars['Int']>;
   id: Scalars['Int'];
 };
 
-export type User = {
+export type IUser = {
   __typename?: 'User';
   /** 생성일시 */
   createdAt: Scalars['String'];
@@ -189,14 +189,14 @@ export type User = {
   /** 자기 소개 */
   intro?: Maybe<Scalars['String']>;
   /** 지역 */
-  location?: Maybe<Location>;
+  location?: Maybe<ILocation>;
   /** 닉네임 */
   nickname?: Maybe<Scalars['String']>;
   /** 수정일시 */
   updatedAt: Scalars['String'];
 };
 
-export type UserTag = {
+export type IUserTag = {
   __typename?: 'UserTag';
   /** 생성일시 */
   createdAt: Scalars['String'];
@@ -208,10 +208,10 @@ export type UserTag = {
   userId: Scalars['Int'];
 };
 
-export type UsersQueryVariables = Exact<{ [key: string]: never; }>;
+export type IUsersQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type UsersQuery = { __typename?: 'Query', users: Array<{ __typename?: 'User', createdAt: string, deleted: boolean, id: number, intro?: string | null, nickname?: string | null, updatedAt: string, location?: { __typename?: 'Location', createdAt: string, deleted: boolean, id: number, name: string, updatedAt: string } | null }> };
+export type IUsersQuery = { __typename?: 'Query', users: Array<{ __typename?: 'User', createdAt: string, deleted: boolean, id: number, intro?: string | null, nickname?: string | null, updatedAt: string, location?: { __typename?: 'Location', createdAt: string, deleted: boolean, id: number, name: string, updatedAt: string } | null }> };
 
 
 export const UsersDocument = `
@@ -234,15 +234,14 @@ export const UsersDocument = `
 }
     `;
 export const useUsersQuery = <
-      TData = UsersQuery,
+      TData = IUsersQuery,
       TError = unknown
     >(
-      dataSource: { endpoint: string, fetchParams?: RequestInit },
-      variables?: UsersQueryVariables,
-      options?: UseQueryOptions<UsersQuery, TError, TData>
+      variables?: IUsersQueryVariables,
+      options?: UseQueryOptions<IUsersQuery, TError, TData>
     ) =>
-    useQuery<UsersQuery, TError, TData>(
+    useQuery<IUsersQuery, TError, TData>(
       variables === undefined ? ['Users'] : ['Users', variables],
-      fetcher<UsersQuery, UsersQueryVariables>(dataSource.endpoint, dataSource.fetchParams || {}, UsersDocument, variables),
+      fetcher<IUsersQuery, IUsersQueryVariables>(UsersDocument, variables),
       options
     );
