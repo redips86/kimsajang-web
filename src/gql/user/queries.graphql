@@ -1,0 +1,17 @@
+query Users {
+    users {
+        createdAt
+        deleted
+        id
+        intro
+        location {
+            createdAt
+            deleted
+            id
+            name
+            updatedAt
+        }
+        nickname
+        updatedAt
+    }
+}

@@ -2,9 +2,31 @@ import type {NextPage} from 'next'
 import Layout from "@components/layout";
 import MainCard from "@components/mainCard";
 import {faCoins, faComments, faCrown, faHeart, faHouse} from "@fortawesome/free-solid-svg-icons";
-import {gql, useQuery} from "@apollo/client";
+// import {useQuery} from "react-query";
+// import { request, gql } from "graphql-request";
+
 
 const Home: NextPage = () => {
+
+  /*  const query = useQuery('todos', async() => {
+        const {
+            posts: { data },
+        } = await request(
+            endpoint,
+            gql`
+                query {
+                    posts {
+                        data {
+                            id
+                            title
+                        }
+                    }
+                }
+            `
+        );
+        return data;
+    })
+
     const TEST = gql`
         query Users {
             users {
@@ -21,9 +43,9 @@ const Home: NextPage = () => {
     const {loading, error, data} = useQuery(TEST);
 
     if(loading) return <p>Loading...</p>;
-    if(error) return <p>Error:(</p>
+    if(error) return <p>{error.message}</p>
 
-    console.log(data);
+*/
 
     return (
 
