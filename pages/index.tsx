@@ -2,13 +2,25 @@ import type {NextPage} from 'next'
 import Layout from "@components/layout";
 import MainCard from "@components/mainCard";
 import {faCoins, faComments, faCrown, faHeart, faHouse} from "@fortawesome/free-solid-svg-icons";
-import {useUsersQuery} from "../src/generated/graphql";
+import {useCreateUserMutation, useUsersQuery} from "../src/generated/graphql";
 
 const Home: NextPage = () => {
     const {data, isLoading} = useUsersQuery();
+    const {mutate} = useCreateUserMutation();
+
+    const onCreateUser = () => {
+        mutate({
+            createUserInput: {
+                nickname: "from frontend",
+                intro: "인트로 한글",
+                locationId: 1
+            }
+        })
+    }
 
     return (
         <Layout title="kimsajang">
+            <button onClick={onCreateUser}>유저 생성</button>
             <div className={"xl:hidden"}>
                 <div className={"grid gap-8"}>
                     <MainCard topic={"토픽 베스트"} icon={faCrown}></MainCard>
@@ -19,10 +31,10 @@ const Home: NextPage = () => {
                 </div>
             </div>
             <div>
-            {isLoading ? <li>loading...</li> : data?.users.map(user => {
-                    return <li key={user.id}>{user.intro}</li>
-                }
-            )}
+                {isLoading ? <li>loading...</li> : data?.users.map(user => {
+                        return <li key={user.id}>{user.intro}</li>
+                    }
+                )}
             </div>
             <div className={"hidden xl:block"}>
                 <div className={"flex"}>

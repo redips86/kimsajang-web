@@ -1,4 +1,4 @@
-import {useQuery, UseQueryOptions} from 'react-query';
+import {useMutation, UseMutationOptions, useQuery, UseQueryOptions} from 'react-query';
 
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
@@ -208,12 +208,33 @@ export type IUserTag = {
   userId: Scalars['Int'];
 };
 
+export type ICreateUserMutationVariables = Exact<{
+  createUserInput: ICreateUserInput;
+}>;
+
+
+export type ICreateUserMutation = { __typename?: 'Mutation', createUser: boolean };
+
 export type IUsersQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type IUsersQuery = { __typename?: 'Query', users: Array<{ __typename?: 'User', createdAt: string, deleted: boolean, id: number, intro?: string | null, nickname?: string | null, updatedAt: string, location?: { __typename?: 'Location', createdAt: string, deleted: boolean, id: number, name: string, updatedAt: string } | null }> };
 
 
+export const CreateUserDocument = `
+    mutation CreateUser($createUserInput: CreateUserInput!) {
+  createUser(createUserInput: $createUserInput)
+}
+    `;
+export const useCreateUserMutation = <
+      TError = unknown,
+      TContext = unknown
+    >(options?: UseMutationOptions<ICreateUserMutation, TError, ICreateUserMutationVariables, TContext>) =>
+    useMutation<ICreateUserMutation, TError, ICreateUserMutationVariables, TContext>(
+      ['CreateUser'],
+      (variables?: ICreateUserMutationVariables) => fetcher<ICreateUserMutation, ICreateUserMutationVariables>(CreateUserDocument, variables)(),
+      options
+    );
 export const UsersDocument = `
     query Users {
   users {
