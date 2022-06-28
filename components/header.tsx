@@ -9,7 +9,9 @@ export default function Layout() {
             <div className={"hidden xl:block flex justify-between pb-2 border-b-2"}>
                 <div className={"flex justify-between p-2"}>
                     <div className={"flex space-x-5 items-end"}>
+                        <Link href={"/"}>
                         <div className={"text-4xl font-bold cursor-pointer"}>Kimsajang</div>
+                        </Link>
                         <div className={"text-2xl font-bold cursor-pointer"}>홈</div>
                         <div className={"text-2xl font-bold cursor-pointer"}>메뉴1</div>
                         <div className={"text-2xl font-bold cursor-pointer"}>메뉴2</div>
