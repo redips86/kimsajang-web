@@ -2,6 +2,7 @@ import Link from "next/link";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faMagnifyingGlass} from "@fortawesome/free-solid-svg-icons";
 import React from "react";
+import LoginBtn from "@components/login-btn";
 
 export default function Layout() {
     return (
@@ -18,7 +19,8 @@ export default function Layout() {
                     </div>
                     <div>
                         <button className={"mx-2 text-white bg-zinc-500 p-3 w-24"}>글쓰기</button>
-                        <button className={"mx-2 border border-zinc-500 p-3 w-24"}>로그인</button>
+                        <LoginBtn/>
+                        {/*<button className={"mx-2 border border-zinc-500 p-3 w-24"}>로그인</button>*/}
                     </div>
                 </div>
 
@@ -36,7 +38,9 @@ export default function Layout() {
                             </button>
                         </Link>
                         <button className={"mx-2 text-white bg-zinc-500 p-3 w-24"}>글쓰기</button>
-                        <button className={"mx-2 border border-zinc-500 p-3 w-24"}>로그인</button>
+                        <LoginBtn/>
+                        {/*<button className={"mx-2 border border-zinc-500 p-3 w-24"}>로그인</button>*/}
+
                     </div>
                 </div>
                 <div className={"flex pb-2 border-b-8"}>
