@@ -10,9 +10,7 @@ export default function MyApp({Component, pageProps: {session, ...pageProps}}: A
     return (
         <SessionProvider session={session}>
             <QueryClientProvider client={queryClient}>
-                <div className="w-full max-w-xl xl:max-w-screen-2xl mx-auto">
-                    <Component {...pageProps} />
-                </div>
+                <Component {...pageProps} />
             </QueryClientProvider>
         </SessionProvider>
     )
