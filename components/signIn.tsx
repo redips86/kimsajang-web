@@ -1,6 +1,41 @@
 import Link from "next/link";
+import {SubmitHandler, useForm} from "react-hook-form";
+import {getAuth, signInWithEmailAndPassword} from "firebase/auth";
+import {useRouter} from "next/router";
+
+interface ISignInInputs {
+    email: string;
+    password: string;
+}
+
 
 export default function SignIn() {
+    const auth = getAuth();
+    const router = useRouter();
+
+    const {register, handleSubmit, watch, formState: {errors}} = useForm<ISignInInputs>();
+
+    const onSubmit: SubmitHandler<ISignInInputs> = (data) => {
+        console.log(data)
+        signInWithEmailAndPassword(auth, data.email, data.password)
+            .then((userCredential) => {
+                // Signed in
+                const user = userCredential.user;
+                console.log(user);
+                router.push('/');
+
+                // ...
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                console.log(errorCode)
+                console.log(errorMessage)
+                // ..
+            });
+
+    }
+
     return (
         <>
             <div className="bg-white dark:bg-gray-900">
@@ -25,12 +60,14 @@ export default function SignIn() {
                             </div>
 
                             <div className="mt-8">
-                                <form>
+                                <form onSubmit={handleSubmit(onSubmit)}>
                                     <div>
                                         <label htmlFor="email"
                                                className="block mb-2 text-sm text-gray-600 dark:text-gray-200">Email
                                             Address</label>
-                                        <input type="email" name="email" id="email" placeholder="example@example.com"
+                                        <input
+                                            {...register("email",{required: true})}
+                                            type="email" name="email" id="email" placeholder="example@example.com"
                                                className="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"/>
                                     </div>
 
@@ -43,7 +80,9 @@ export default function SignIn() {
                                                 password?</a>
                                         </div>
 
-                                        <input type="password" name="password" id="password" placeholder="Your Password"
+                                        <input
+                                            {...register("password", {required: true})}
+                                            type="password" name="password" id="password" placeholder="Your Password"
                                                className="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"/>
                                     </div>
 

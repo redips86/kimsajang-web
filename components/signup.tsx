@@ -5,7 +5,7 @@ import {SubmitHandler, useForm} from "react-hook-form";
 import {useRouter} from "next/router";
 
 
-interface Inputs {
+interface ISignUpInputs {
     email: string;
     password: string;
     password_confirm: string;
@@ -17,9 +17,9 @@ export default function SignUp() {
     const router = useRouter();
 
     const {mutate} = useCreateUserMutation();
-    const {register, handleSubmit, watch, formState: {errors}} = useForm<Inputs>();
+    const {register, handleSubmit, watch, formState: {errors}} = useForm<ISignUpInputs>();
 
-    const onSubmit: SubmitHandler<Inputs> = (data) => {
+    const onSubmit: SubmitHandler<ISignUpInputs> = (data) => {
         console.log(data)
         createUserWithEmailAndPassword(auth, data.email, data.password)
             .then((userCredential) => {
@@ -78,7 +78,7 @@ export default function SignUp() {
                                                className="block mb-2 text-sm text-gray-600 dark:text-gray-200">이메일
                                             주소</label>
                                         <input
-                                            {...register("email")}
+                                            {...register("email", {required: true})}
                                             type="email" name="email" id="email" placeholder="example@example.com"
                                                className="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"/>
                                     </div>
@@ -90,7 +90,7 @@ export default function SignUp() {
                                         </div>
 
                                         <input
-                                            {...register("password")}
+                                            {...register("password", {required: true})}
                                             type="password" name="password" id="password" placeholder="Your Password"
                                                className="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"/>
                                     </div>
@@ -102,7 +102,7 @@ export default function SignUp() {
                                         </div>
 
                                         <input
-                                            {...register("password_confirm")}
+                                            {...register("password_confirm", {required: true})}
                                             type="password" name="password_confirm" id="password_confirm"
                                                placeholder="Your Password"
                                                className="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"/>
