@@ -15,7 +15,6 @@ export default function Layout({
     return <div className="w-full max-w-xl xl:max-w-screen-2xl mx-auto">
         <Head>
             <title>{title}</title>
-            <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
         </Head>
         <Header></Header>
         <div>
