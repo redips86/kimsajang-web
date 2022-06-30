@@ -1,5 +1,4 @@
 import {useCreateUserMutation} from "../src/generated/graphql";
-import {createUserWithEmailAndPassword, getAuth} from "firebase/auth";
 import React from "react";
 import {SubmitHandler, useForm} from "react-hook-form";
 import {useRouter} from "next/router";
@@ -13,40 +12,23 @@ interface ISignUpInputs {
 
 
 export default function SignUp() {
-    const auth = getAuth();
     const router = useRouter();
 
-    const {mutate} = useCreateUserMutation();
+    const {mutate} = useCreateUserMutation({
+        onError: error => (console.log(error)),
+        onSuccess: () => router.push('/auth/signin'),
+    });
     const {register, handleSubmit, watch, formState: {errors}} = useForm<ISignUpInputs>();
 
     const onSubmit: SubmitHandler<ISignUpInputs> = (data) => {
-        console.log(data)
-        createUserWithEmailAndPassword(auth, data.email, data.password)
-            .then((userCredential) => {
-                // Signed in
-                const user = userCredential.user;
-                console.log(user);
-                router.push('/auth/signin');
-                // ...
-            })
-            .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                console.log(errorCode)
-                console.log(errorMessage)
-                // ..
-            });
-
+        // password 비교 후 react-hook에 전달해야 함.
+        mutate({
+            createUserInput: {
+                email: data.email,
+                password: data.password
+            }
+        })
     }
-
-        // mutate({
-        //   createUserInput: {
-        //     nickname: "from frontend",
-        //     intro: "인트로 한글",
-        //     locationId: 1
-        //   }
-        // })
-    // }
 
     return (
         <>
@@ -80,7 +62,7 @@ export default function SignUp() {
                                         <input
                                             {...register("email", {required: true})}
                                             type="email" name="email" id="email" placeholder="example@example.com"
-                                               className="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"/>
+                                            className="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"/>
                                     </div>
 
                                     <div className="mt-6">
@@ -92,7 +74,7 @@ export default function SignUp() {
                                         <input
                                             {...register("password", {required: true})}
                                             type="password" name="password" id="password" placeholder="Your Password"
-                                               className="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"/>
+                                            className="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"/>
                                     </div>
 
                                     <div className="mt-6">
@@ -104,8 +86,8 @@ export default function SignUp() {
                                         <input
                                             {...register("password_confirm", {required: true})}
                                             type="password" name="password_confirm" id="password_confirm"
-                                               placeholder="Your Password"
-                                               className="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"/>
+                                            placeholder="Your Password"
+                                            className="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"/>
                                     </div>
 
                                     <div className="mt-6">

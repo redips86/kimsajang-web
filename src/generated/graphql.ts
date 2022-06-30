@@ -46,14 +46,10 @@ export type ICreateLocationInput = {
 };
 
 export type ICreateUserInput = {
-  /** 자기소개 */
-  intro?: InputMaybe<Scalars["String"]>;
-  /** 지역 */
-  locationId?: InputMaybe<Scalars["Float"]>;
   /** 닉네임 */
-  nickname?: InputMaybe<Scalars["String"]>;
-  /** 업종 */
-  sectorIds?: InputMaybe<Array<Scalars["Float"]>>;
+  email?: InputMaybe<Scalars["String"]>;
+  /** 자기소개 */
+  password?: InputMaybe<Scalars["String"]>;
 };
 
 export type ICreateUserTagInput = {
@@ -154,16 +150,12 @@ export type IUpdateLocationInput = {
 };
 
 export type IUpdateUserInput = {
+  /** 닉네임 */
+  email?: InputMaybe<Scalars["String"]>;
   /** 사용자 ID */
   id: Scalars["Int"];
   /** 자기소개 */
-  intro?: InputMaybe<Scalars["String"]>;
-  /** 지역 */
-  locationId?: InputMaybe<Scalars["Float"]>;
-  /** 닉네임 */
-  nickname?: InputMaybe<Scalars["String"]>;
-  /** 업종 */
-  sectorIds?: InputMaybe<Array<Scalars["Float"]>>;
+  password?: InputMaybe<Scalars["String"]>;
 };
 
 export type IUpdateUserTagInput = {
