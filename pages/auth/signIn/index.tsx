@@ -1,39 +1,40 @@
-import Link from "next/link";
-import {SubmitHandler, useForm} from "react-hook-form";
-import {getAuth, signInWithEmailAndPassword} from "firebase/auth";
+import {NextPage} from "next";
 import {useRouter} from "next/router";
+import {getCsrfToken, signIn, useSession} from "next-auth/react";
+import {SubmitHandler, useForm} from "react-hook-form";
+import Link from "next/link";
+import {CtxOrReq} from "next-auth/client/_utils";
 
 interface ISignInInputs {
     email: string;
     password: string;
 }
 
+interface IProps {
+    csrfToken?: string
+}
 
-export default function SignIn() {
-    const auth = getAuth();
+const Index: NextPage = ({csrfToken} : IProps) => {
     const router = useRouter();
+    const {data: session} = useSession()
 
     const {register, handleSubmit, watch, formState: {errors}} = useForm<ISignInInputs>();
 
-    const onSubmit: SubmitHandler<ISignInInputs> = (data) => {
-        console.log(data)
-        signInWithEmailAndPassword(auth, data.email, data.password)
-            .then((userCredential) => {
-                // Signed in
-                const user = userCredential.user;
-                console.log(user);
-                router.push('/');
+    const onSubmit: SubmitHandler<ISignInInputs> = async ({email, password}) => {
+        const result = await signIn("credentials",
+            {
+                redirect: false,
+                email,
+                password
+            }
+        );
 
-                // ...
-            })
-            .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                console.log(errorCode)
-                console.log(errorMessage)
-                // ..
-            });
-
+        //console.log(result);
+        if (result?.error) {
+            //console.log(`Error occured : ${result.error}`)
+        } else {
+            await router.replace("/");
+        }
     }
 
     return (
@@ -61,14 +62,15 @@ export default function SignIn() {
 
                             <div className="mt-8">
                                 <form onSubmit={handleSubmit(onSubmit)}>
+                                    <input name="csrfToken" type="hidden" defaultValue={csrfToken}/>
                                     <div>
                                         <label htmlFor="email"
                                                className="block mb-2 text-sm text-gray-600 dark:text-gray-200">Email
                                             Address</label>
                                         <input
-                                            {...register("email",{required: true})}
+                                            {...register("email", {required: true})}
                                             type="email" name="email" id="email" placeholder="example@example.com"
-                                               className="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"/>
+                                            className="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"/>
                                     </div>
 
                                     <div className="mt-6">
@@ -83,7 +85,7 @@ export default function SignIn() {
                                         <input
                                             {...register("password", {required: true})}
                                             type="password" name="password" id="password" placeholder="Your Password"
-                                               className="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"/>
+                                            className="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"/>
                                     </div>
 
                                     <div className="mt-6">
@@ -97,7 +99,7 @@ export default function SignIn() {
 
                                 <p className="mt-6 text-sm text-center text-gray-400">Don&#x27;t have an account yet?
                                     <span className="text-blue-500 focus:outline-none focus:underline hover:underline">
-                                        <Link href={"/auth/signup"}>
+                                        <Link href={"/auth/signUp"}>
                                             Sign up
                                         </Link>
                                     </span>
@@ -110,4 +112,14 @@ export default function SignIn() {
 
         </>
     )
+}
+
+export default Index;
+
+export async function getServerSideProps(context: CtxOrReq | undefined) {
+    return {
+        props: {
+            csrfToken: await getCsrfToken(context),
+        },
+    }
 }
