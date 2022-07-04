@@ -7,7 +7,7 @@ export default function LoginBtn() {
     if (session) {
         return (
             <>
-                {session.user.email}
+                {session?.user?.email}
                 <button className={"mx-2 border border-zinc-500 p-3 w-24"} onClick={() => signOut()}>로그아웃</button>
             </>
         )
